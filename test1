@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>International Law — Research, Resources & Commentary</title>
+<style>
+  :root {
+    --navy: #1c2a3a;
+    --navy-light: #2c3e50;
+    --slate: #4a5a6a;
+    --accent: #8b6f3e;        /* muted gold */
+    --accent-deep: #6f5830;
+    --bg: #f7f5f0;            /* warm neutral */
+    --bg-card: #ffffff;
+    --border: #e3ddd2;
+    --text: #2b2b2b;
+    --text-soft: #5a5852;
+    --serif: 'Georgia', 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Navigation ---------- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(28, 42, 58, 0.97);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: var(--serif);
+    color: #fff;
+    font-size: 1.15rem;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+  }
+  .nav-brand span { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: #cdd5dd;
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.4px;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a:hover { color: #fff; }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--accent);
+    transition: width 0.25s;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-toggle {
+    display: none;
+    background: none; border: none;
+    color: #fff; font-size: 1.5rem; cursor: pointer;
+  }
+
+  /* ---------- Hero ---------- */
+  header.hero {
+    background: linear-gradient(150deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: #fff;
+    padding: 150px 32px 110px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 30%, rgba(139,111,62,0.12), transparent 40%),
+                      radial-gradient(circle at 80% 70%, rgba(139,111,62,0.08), transparent 40%);
+  }
+  .hero-content { position: relative; max-width: 760px; margin: 0 auto; }
+  .hero-kicker {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-bottom: 22px;
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 3rem;
+    line-height: 1.2;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .hero p {
+    font-size: 1.18rem;
+    color: #c8d0d8;
+    max-width: 600px;
+    margin: 0 auto 36px;
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 13px 34px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    letter-spacing: 0.5px;
+    border-radius: 2px;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .hero-cta:hover { background: var(--accent-deep); transform: translateY(-2px); }
+
+  /* ---------- Sections ---------- */
+  section {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 90px 32px;
+  }
+  .section-label {
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 2.1rem;
+    color: var(--navy);
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+  .section-intro {
+    color: var(--text-soft);
+    max-width: 680px;
+    margin-bottom: 44px;
+    font-size: 1.05rem;
+  }
+  .divider {
+    width: 52px; height: 3px;
+    background: var(--accent);
+    margin-bottom: 28px;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .about-photo {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, #d9d2c4, #c4bba8);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--slate);
+    font-size: 0.85rem;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .about-text p { margin-bottom: 18px; color: var(--text-soft); }
+  .about-text p strong { color: var(--navy); }
+  .interest-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
+  }
+  .interest-tags span {
+    background: #ece6db;
+    color: var(--navy-light);
+    padding: 6px 15px;
+    font-size: 0.82rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+
+  /* ---------- Foundations ---------- */
+  .foundations-section { background: #fff; }
+  .found-wrap { max-width: 1080px; margin: 0 auto; padding: 90px 32px; }
+  .found-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 10px;
+  }
+  .found-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 30px 28px;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .found-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(28,42,58,0.08);
+  }
+  .found-card .num {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .found-card h3 {
+    font-family: var(--serif);
+    color: var(--navy);
+    font-size: 1.22rem;
+    margin-bottom: 12px;
+  }
+  .found-card p { color: var(--text-soft); font-size: 0.96rem; }
+
+  /* ---------- Resources ---------- */
+  .res-group { margin-bottom: 44px; }
+  .res-group h3 {
+    font-family: var(--serif);
+    color: var(--navy);
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .res-group h3 .tag {
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--navy);
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .res-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 4px 32px;
+    margin-top: 16px;
+  }
+  .res-list a {
+    display: block;
+    padding: 13px 16px;
+    text-decoration: none;
+    color: var(--text);
+    border-radius: 4px;
+    transition: background 0.2s;
+    border-left: 2px solid transparent;
+  }
+  .res-list a:hover {
+    background: #fff;
+    border-left-color: var(--accent);
+  }
+  .res-list a .r-title {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 0.98rem;
+  }
+  .res-list a .r-desc {
+    font-size: 0.85rem;
+    color: var(--text-soft);
+    display: block;
+    margin-top: 2px;
+  }
+  .res-list a .r-title::after {
+    content: ' ↗';
+    color: var(--accent);
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .res-list a:hover .r-title::after { opacity: 1; }
+
+  /* ---------- Commentary ---------- */
+  .commentary-section { background: #fff; }
+  .comm-wrap { max-width: 1080px; margin: 0 auto; padding: 90px 32px; }
+  .comm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+    margin-top: 10px;
+  }
+  .comm-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 30px;
+    background: var(--bg);
+    transition: box-shadow 0.25s, transform 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .comm-card:hover {
+    box-shadow: 0 12px 30px rgba(28,42,58,0.08);
+    transform: translateY(-4px);
+  }
+  .comm-date {
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .comm-card h3 {
+    font-family: var(--serif);
+    color: var(--navy);
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+    line-height: 1.35;
+  }
+  .comm-card p { color: var(--text-soft); font-size: 0.96rem; margin-bottom: 18px; }
+  .comm-read {
+    margin-top: auto;
+    color: var(--navy);
+    font-size: 0.86rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.4px;
+  }
+  .comm-read:hover { color: var(--accent); }
+  .comm-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    background: #ece6db;
+    color: var(--navy-light);
+    padding: 3px 11px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--navy);
+    color: #b9c2cc;
+    padding: 56px 32px 40px;
+    text-align: center;
+  }
+  footer .f-name {
+    font-family: var(--serif);
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+  footer .f-contact { font-size: 0.92rem; margin-bottom: 22px; }
+  footer .f-contact a { color: var(--accent); text-decoration: none; }
+  footer .f-contact a:hover { text-decoration: underline; }
+  footer .f-line {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 22px;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: #7e8a96;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 760px) {
+    .nav-links {
+      position: fixed;
+      top: 64px; right: 0;
+      flex-direction: column;
+      background: var(--navy);
+      width: 200px;
+      padding: 20px 0;
+      gap: 0;
+      transform: translateX(100%);
+      transition: transform 0.3s;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      height: calc(100vh - 64px);
+    }
+    .nav-links.open { transform: translateX(0); }
+    .nav-links li { padding: 12px 26px; }
+    .nav-toggle { display: block; }
+    .hero h1 { font-size: 2.1rem; }
+    .hero p { font-size: 1.05rem; }
+    header.hero { padding: 120px 24px 80px; }
+    section, .found-wrap, .comm-wrap { padding: 60px 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .about-photo { max-width: 240px; }
+    .section-title { font-size: 1.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">Yu-Chen (Dino) Cheng<span>.</span></div>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#foundations">Introduction</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#commentary">Commentary</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-kicker">International Law</div>
+    <h1>Research, Resources &amp; Commentary on International Law</h1>
+    <p>A study space for the structures, sources, and current questions of public international law — built for students who want to understand the field, not just memorise it.</p>
+    <a href="#foundations" class="hero-cta">Start with the Introduction</a>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Me</div>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-photo">[ Photo ]</div>
+    <div class="about-text">
+      <h2 class="section-title">About Me</h2>
+      <p>I am a researcher and student of <strong>public international law</strong> at National Chengchi University (NCCU). My work sits at the intersection of doctrine and method — how international courts reason, where the rules come from, and how they apply to contested questions of statehood, jurisdiction, and the use of force.</p>
+      <p>This site collects what I find useful as I work: an orientation to the field for newcomers, a curated set of primary and scholarly sources, and short commentary on developments worth following. <em>[Replace this paragraph with a couple of lines in your own voice — your background, what drew you to the field, and what you hope readers take away.]</em></p>
+      <div class="interest-tags">
+        <span>ICJ Jurisprudence</span>
+        <span>Sources of International Law</span>
+        <span>Jurisdiction &amp; State Immunity</span>
+        <span>Use of Force</span>
+        <span>International Human Rights Law</span>
+        <span>Taiwan / ROC Questions</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDATIONS -->
+<div class="foundations-section" id="foundations">
+  <div class="found-wrap">
+    <div class="section-label">Introduction</div>
+    <div class="divider"></div>
+    <h2 class="section-title">An Orientation to International Law</h2>
+    <p class="section-intro">International law is the body of rules and principles that govern relations between states — and, increasingly, between states, international organisations, and individuals. Unlike domestic law, it has no central legislature or compulsory court. Its authority rests on consent, practice, and a shared sense of legal obligation. The building blocks below are where most students begin.</p>
+    <div class="found-grid">
+      <div class="found-card">
+        <div class="num">01</div>
+        <h3>What It Is</h3>
+        <p>A horizontal legal order without a sovereign above states. Obligations arise mainly from what states agree to and how they actually behave, giving the field its distinctive reliance on consent and reciprocity.</p>
+      </div>
+      <div class="found-card">
+        <div class="num">02</div>
+        <h3>Sources</h3>
+        <p>Article 38 of the ICJ Statute is the classic starting point: treaties, customary international law (state practice plus <em>opinio juris</em>), general principles of law, and — as subsidiary means — judicial decisions and scholarship.</p>
+      </div>
+      <div class="found-card">
+        <div class="num">03</div>
+        <h3>Subjects</h3>
+        <p>States are the primary subjects, but international organisations, individuals, and other entities now hold rights and duties too — from human rights protections to individual criminal responsibility.</p>
+      </div>
+      <div class="found-card">
+        <div class="num">04</div>
+        <h3>Institutions</h3>
+        <p>The United Nations and its organs, the International Court of Justice, regional courts, and specialised tribunals give the system its forums for dispute settlement, law-making, and accountability.</p>
+      </div>
+      <div class="found-card">
+        <div class="num">05</div>
+        <h3>Key Fields</h3>
+        <p>The discipline branches into the law of treaties, state responsibility, the use of force, international humanitarian law, human rights, the law of the sea, and international criminal law, among others.</p>
+      </div>
+      <div class="found-card">
+        <div class="num">06</div>
+        <h3>How to Read It</h3>
+        <p>Argument in international law is source-driven. Strong analysis traces a rule to its origin, tests it against state practice and case law, and applies it carefully to the facts — the method behind every good memorial.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESOURCES -->
+<section id="resources">
+  <div class="section-label">Resources</div>
+  <div class="divider"></div>
+  <h2 class="section-title">A Curated Reading &amp; Reference List</h2>
+  <p class="section-intro">Primary sources first, then the institutions, databases, and commentary that make the field navigable. These are starting points I return to often — verify currency before citing, and prefer the original instrument over any summary of it.</p>
+
+  <div class="res-group">
+    <h3>Primary Sources <span class="tag">Foundational</span></h3>
+    <div class="res-list">
+      <a href="https://www.icj-cij.org/statute" target="_blank" rel="noopener">
+        <span class="r-title">Statute of the ICJ</span>
+        <span class="r-desc">Article 38 — the canonical list of sources of international law.</span>
+      </a>
+      <a href="https://www.un.org/en/about-us/un-charter/full-text" target="_blank" rel="noopener">
+        <span class="r-title">Charter of the United Nations</span>
+        <span class="r-desc">Full text — purposes, principles, and the use-of-force framework.</span>
+      </a>
+      <a href="https://legal.un.org/ilc/texts/instruments/english/conventions/1_1_1969.pdf" target="_blank" rel="noopener">
+        <span class="r-title">Vienna Convention on the Law of Treaties</span>
+        <span class="r-desc">1969 VCLT — interpretation, validity, and termination of treaties.</span>
+      </a>
+      <a href="https://legal.un.org/ilc/texts/instruments/english/draft_articles/9_6_2001.pdf" target="_blank" rel="noopener">
+        <span class="r-title">ILC Articles on State Responsibility</span>
+        <span class="r-desc">2001 ARSIWA — attribution, breach, and consequences.</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="res-group">
+    <h3>Courts &amp; Institutions <span class="tag">Jurisprudence</span></h3>
+    <div class="res-list">
+      <a href="https://www.icj-cij.org/" target="_blank" rel="noopener">
+        <span class="r-title">International Court of Justice</span>
+        <span class="r-desc">Judgments, advisory opinions, and pending cases.</span>
+      </a>
+      <a href="https://pca-cpa.org/" target="_blank" rel="noopener">
+        <span class="r-title">Permanent Court of Arbitration</span>
+        <span class="r-desc">Inter-state and investor-state arbitration case repository.</span>
+      </a>
+      <a href="https://legal.un.org/ilc/" target="_blank" rel="noopener">
+        <span class="r-title">International Law Commission</span>
+        <span class="r-desc">Codification and progressive development of the law.</span>
+      </a>
+      <a href="https://www.icc-cpi.int/" target="_blank" rel="noopener">
+        <span class="r-title">International Criminal Court</span>
+        <span class="r-desc">Situations, cases, and the Rome Statute framework.</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="res-group">
+    <h3>Databases &amp; Treaty Tools <span class="tag">Research</span></h3>
+    <div class="res-list">
+      <a href="https://treaties.un.org/" target="_blank" rel="noopener">
+        <span class="r-title">UN Treaty Collection</span>
+        <span class="r-desc">Status, parties, and reservations for multilateral treaties.</span>
+      </a>
+      <a href="https://legal.un.org/avl/" target="_blank" rel="noopener">
+        <span class="r-title">UN Audiovisual Library of Int'l Law</span>
+        <span class="r-desc">Lectures and historical archives by leading scholars.</span>
+      </a>
+      <a href="https://opil.ouplaw.com/home/mpil" target="_blank" rel="noopener">
+        <span class="r-title">Max Planck Encyclopedia (MPEPIL)</span>
+        <span class="r-desc">Authoritative entries on doctrines and cases (often via library access).</span>
+      </a>
+      <a href="https://www.refworld.org/" target="_blank" rel="noopener">
+        <span class="r-title">Refworld</span>
+        <span class="r-desc">Refugee, human rights, and IHL legal documents.</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="res-group">
+    <h3>Scholarly Commentary <span class="tag">Debate</span></h3>
+    <div class="res-list">
+      <a href="https://www.ejiltalk.org/" target="_blank" rel="noopener">
+        <span class="r-title">EJIL: Talk!</span>
+        <span class="r-desc">Blog of the European Journal of International Law.</span>
+      </a>
+      <a href="https://opiniojuris.org/" target="_blank" rel="noopener">
+        <span class="r-title">Opinio Juris</span>
+        <span class="r-desc">Long-running commentary on current developments.</span>
+      </a>
+      <a href="https://www.justsecurity.org/" target="_blank" rel="noopener">
+        <span class="r-title">Just Security</span>
+        <span class="r-desc">Law and policy on security, armed conflict, and rights.</span>
+      </a>
+      <a href="https://academic.oup.com/ejil" target="_blank" rel="noopener">
+        <span class="r-title">European Journal of International Law</span>
+        <span class="r-desc">Leading peer-reviewed scholarship in the field.</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COMMENTARY -->
+<div class="commentary-section" id="commentary">
+  <div class="comm-wrap">
+    <div class="section-label">Commentary</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Notes on Recent Developments</h2>
+    <p class="section-intro">Short analytical pieces on developments in international law — judgments, resolutions, and debates worth a second look. These entries are placeholders; replace the text with your own commentary as you write it.</p>
+    <div class="comm-grid">
+      <article class="comm-card">
+        <span class="comm-tag">ICJ</span>
+        <div class="comm-date">[ Date ]</div>
+        <h3>[ Title of Your First Commentary ]</h3>
+        <p>A two-to-three sentence summary of the development and your angle on it. What happened, why it matters doctrinally, and what to watch next. Keep it tight — the card is a teaser for the full piece.</p>
+        <a href="#" class="comm-read">Read more →</a>
+      </article>
+      <article class="comm-card">
+        <span class="comm-tag">Use of Force</span>
+        <div class="comm-date">[ Date ]</div>
+        <h3>[ Title of Your Second Commentary ]</h3>
+        <p>A short framing of the issue and your reading of it. Identify the legal question, the competing positions, and where you land — or what remains genuinely unsettled.</p>
+        <a href="#" class="comm-read">Read more →</a>
+      </article>
+      <article class="comm-card">
+        <span class="comm-tag">UN / ILC</span>
+        <div class="comm-date">[ Date ]</div>
+        <h3>[ Title of Your Third Commentary ]</h3>
+        <p>A concise note on a resolution, report, or codification effort. What the text does, how it fits existing law, and the practical or doctrinal stakes for students following the topic.</p>
+        <a href="#" class="comm-read">Read more →</a>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-name">Yu-Chen (Dino) Cheng</div>
+  <div class="f-contact">
+    National Chengchi University · International Law<br>
+    <a href="mailto:cyc.intl.law@gmail.com">cyc.intl.law@gmail.com</a>
+  </div>
+  <div class="f-line">
+    © <span id="year"></span> Yu-Chen (Dino) Cheng. For educational purposes. Always verify primary sources before citing.
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => links.classList.remove('open'))
+  );
+
+  // Current year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
